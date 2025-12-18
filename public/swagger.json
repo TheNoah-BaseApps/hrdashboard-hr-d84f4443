@@ -1,0 +1,404 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Application API Documentation",
+    "version": "1.0.0",
+    "description": "API documentation for the generated application",
+    "contact": {
+      "name": "API Support"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://your-production-url.com",
+      "description": "Production server"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      },
+      "apiKey": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-Key"
+      }
+    }
+  },
+  "security": [],
+  "paths": {
+    "/api/access-management/{id}": {
+      "get": {
+        "summary": "Retrieve single access record",
+        "tags": [
+          "Access Management"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "put": {
+        "summary": "Update access record",
+        "tags": [
+          "Access Management"
+        ]
+      },
+      "delete": {
+        "summary": "Remove access record",
+        "tags": [
+          "Access Management"
+        ]
+      }
+    },
+    "/api/access-management": {
+      "get": {
+        "summary": "List all access management records with filters",
+        "tags": [
+          "Access Management"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of access management records"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create new access grant record",
+        "tags": [
+          "Access Management"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Access record created"
+          }
+        }
+      }
+    },
+    "/api/auth/login": {
+      "post": {
+        "summary": "Authenticate user and return JWT token",
+        "tags": [
+          "Authentication"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "email",
+                  "password"
+                ],
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login successful"
+          },
+          "401": {
+            "description": "Invalid credentials"
+          }
+        }
+      }
+    },
+    "/api/auth/logout": {
+      "post": {
+        "summary": "Logout user and invalidate session",
+        "tags": [
+          "Authentication"
+        ],
+        "responses": {
+          "200": {
+            "description": "Logout successful"
+          }
+        }
+      }
+    },
+    "/api/auth/me": {
+      "get": {
+        "summary": "Get current authenticated user profile",
+        "tags": [
+          "Authentication"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User profile"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/api/auth/register": {
+      "post": {
+        "summary": "Register a new user",
+        "tags": [
+          "Authentication"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "email",
+                  "password",
+                  "full_name",
+                  "role"
+                ],
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "full_name": {
+                    "type": "string"
+                  },
+                  "role": {
+                    "type": "string"
+                  },
+                  "department": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User registered successfully"
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "409": {
+            "description": "Email already exists"
+          }
+        }
+      }
+    },
+    "/api/dashboard/alerts": {
+      "get": {
+        "summary": "Get expiring access and overdue tasks",
+        "tags": [
+          "Dashboard"
+        ]
+      }
+    },
+    "/api/dashboard/metrics": {
+      "get": {
+        "summary": "Retrieve aggregated metrics across workflows",
+        "tags": [
+          "Dashboard"
+        ]
+      }
+    },
+    "/api/employee-onboarding/{id}": {
+      "get": {
+        "summary": "Retrieve single onboarding task",
+        "tags": [
+          "Employee Onboarding"
+        ]
+      },
+      "put": {
+        "summary": "Update onboarding task",
+        "tags": [
+          "Employee Onboarding"
+        ]
+      },
+      "delete": {
+        "summary": "Remove onboarding task",
+        "tags": [
+          "Employee Onboarding"
+        ]
+      }
+    },
+    "/api/employee-onboarding": {
+      "get": {
+        "summary": "List all onboarding tasks with filters",
+        "tags": [
+          "Employee Onboarding"
+        ]
+      },
+      "post": {
+        "summary": "Create new onboarding task",
+        "tags": [
+          "Employee Onboarding"
+        ]
+      }
+    },
+    "/api/employee-staffing/{id}": {
+      "get": {
+        "summary": "Retrieve single staffing plan",
+        "tags": [
+          "Employee Staffing"
+        ]
+      },
+      "put": {
+        "summary": "Update staffing plan",
+        "tags": [
+          "Employee Staffing"
+        ]
+      },
+      "delete": {
+        "summary": "Remove staffing plan",
+        "tags": [
+          "Employee Staffing"
+        ]
+      }
+    },
+    "/api/employee-staffing": {
+      "get": {
+        "summary": "List all staffing plans with filters",
+        "tags": [
+          "Employee Staffing"
+        ]
+      },
+      "post": {
+        "summary": "Create new staffing plan",
+        "tags": [
+          "Employee Staffing"
+        ]
+      }
+    },
+    "/api/example": {
+      "get": {
+        "summary": "Example GET endpoint",
+        "description": "Returns a sample response to demonstrate API structure",
+        "tags": [
+          "Examples"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Hello from the API"
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "string",
+                          "example": "success"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Example POST endpoint",
+        "description": "Accepts data and returns a confirmation",
+        "tags": [
+          "Examples"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "name"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "John Doe"
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "example": "john@example.com"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Data received successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "receivedData": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request data"
+          }
+        }
+      }
+    }
+  },
+  "tags": []
+}
