@@ -18,7 +18,8 @@ import {
   Users,
   Headphones,
   Gift,
-  Target
+  Target,
+  Calendar
 } from 'lucide-react';
 
 const navItems = [
@@ -26,6 +27,9 @@ const navItems = [
   { name: 'Access Management', href: '/access-management', icon: UserCheck },
   { name: 'Employee Onboarding', href: '/employee-onboarding', icon: ClipboardList },
   { name: 'Employee Staffing', href: '/employee-staffing', icon: Briefcase },
+  { name: 'Jobs Card', href: '/jobs-card', icon: Briefcase },
+  { name: 'Leaves & Attendance', href: '/leaves-attendance', icon: Calendar },
+  { name: 'Payroll', href: '/payroll', icon: DollarSign },
   { name: 'Compensation Planning', href: '/compensation-planning', icon: DollarSign },
   { name: 'Culture & Experience', href: '/culture-experience', icon: Heart },
   { name: 'Employee Engagement', href: '/employee-engagement', icon: Users },

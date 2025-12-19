@@ -1787,6 +1787,725 @@
           }
         }
       }
+    },
+    "/api/jobs-card/{id}": {
+      "get": {
+        "summary": "Get a jobs card by ID",
+        "description": "Retrieve a single employee job information card",
+        "tags": [
+          "Jobs Card"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Jobs card ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved jobs card"
+          },
+          "404": {
+            "description": "Jobs card not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a jobs card",
+        "description": "Update an existing employee job information card",
+        "tags": [
+          "Jobs Card"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Jobs card ID"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Jobs card updated successfully"
+          },
+          "404": {
+            "description": "Jobs card not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a jobs card",
+        "description": "Delete an employee job information card",
+        "tags": [
+          "Jobs Card"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Jobs card ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Jobs card deleted successfully"
+          },
+          "404": {
+            "description": "Jobs card not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/jobs-card": {
+      "get": {
+        "summary": "Get all jobs cards",
+        "description": "Retrieve all employee job information cards with pagination",
+        "tags": [
+          "Jobs Card"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "default": 100
+            },
+            "description": "Number of records to return"
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            },
+            "description": "Number of records to skip"
+          },
+          {
+            "in": "query",
+            "name": "department",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by department"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved jobs cards",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new jobs card",
+        "description": "Create a new employee job information card",
+        "tags": [
+          "Jobs Card"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "date",
+                  "employment_status",
+                  "aca_full_time",
+                  "employee_name",
+                  "location",
+                  "department",
+                  "job_title",
+                  "reports_to",
+                  "pay_rate",
+                  "pay_type",
+                  "pay_schedule"
+                ],
+                "properties": {
+                  "date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "employment_status": {
+                    "type": "string"
+                  },
+                  "aca_full_time": {
+                    "type": "boolean"
+                  },
+                  "employee_name": {
+                    "type": "string"
+                  },
+                  "note": {
+                    "type": "string"
+                  },
+                  "location": {
+                    "type": "string"
+                  },
+                  "department": {
+                    "type": "string"
+                  },
+                  "job_title": {
+                    "type": "string"
+                  },
+                  "reports_to": {
+                    "type": "string"
+                  },
+                  "pay_rate": {
+                    "type": "integer"
+                  },
+                  "pay_type": {
+                    "type": "string"
+                  },
+                  "pay_schedule": {
+                    "type": "string"
+                  },
+                  "bonus_amount": {
+                    "type": "integer"
+                  },
+                  "bonus_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "bonus_reason": {
+                    "type": "string"
+                  },
+                  "bonus_comment": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Jobs card created successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/leaves-attendance/{id}": {
+      "get": {
+        "summary": "Get a leave/attendance record by ID",
+        "description": "Retrieve a single employee leave or attendance record",
+        "tags": [
+          "Leaves and Attendance"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Leave/attendance record ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved record"
+          },
+          "404": {
+            "description": "Record not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a leave/attendance record",
+        "description": "Update an existing employee leave or attendance record",
+        "tags": [
+          "Leaves and Attendance"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Leave/attendance record ID"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Record updated successfully"
+          },
+          "404": {
+            "description": "Record not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a leave/attendance record",
+        "description": "Delete an employee leave or attendance record",
+        "tags": [
+          "Leaves and Attendance"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Leave/attendance record ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Record deleted successfully"
+          },
+          "404": {
+            "description": "Record not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/leaves-attendance": {
+      "get": {
+        "summary": "Get all leaves and attendance records",
+        "description": "Retrieve all employee leave requests and attendance records with pagination",
+        "tags": [
+          "Leaves and Attendance"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "default": 100
+            },
+            "description": "Number of records to return"
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            },
+            "description": "Number of records to skip"
+          },
+          {
+            "in": "query",
+            "name": "status",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by status"
+          },
+          {
+            "in": "query",
+            "name": "type",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by leave type"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved leaves and attendance records",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new leave/attendance record",
+        "description": "Create a new employee leave request or attendance record",
+        "tags": [
+          "Leaves and Attendance"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "date",
+                  "status",
+                  "type",
+                  "duration",
+                  "assigned_to"
+                ],
+                "properties": {
+                  "date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "status": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  },
+                  "duration": {
+                    "type": "string"
+                  },
+                  "assigned_to": {
+                    "type": "string"
+                  },
+                  "comment": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Leave/attendance record created successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/payroll/{id}": {
+      "get": {
+        "summary": "Get a payroll record by ID",
+        "description": "Retrieve a single employee payroll record",
+        "tags": [
+          "Payroll"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Payroll record ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved payroll record"
+          },
+          "404": {
+            "description": "Record not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a payroll record",
+        "description": "Update an existing employee payroll record",
+        "tags": [
+          "Payroll"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Payroll record ID"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Payroll record updated successfully"
+          },
+          "404": {
+            "description": "Record not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a payroll record",
+        "description": "Delete an employee payroll record",
+        "tags": [
+          "Payroll"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Payroll record ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Payroll record deleted successfully"
+          },
+          "404": {
+            "description": "Record not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/payroll": {
+      "get": {
+        "summary": "Get all payroll records",
+        "description": "Retrieve all employee payroll and compensation information with pagination",
+        "tags": [
+          "Payroll"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "default": 100
+            },
+            "description": "Number of records to return"
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            },
+            "description": "Number of records to skip"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved payroll records",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new payroll record",
+        "description": "Create a new employee payroll and compensation record",
+        "tags": [
+          "Payroll"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "name",
+                  "ssn",
+                  "address",
+                  "occupation",
+                  "gender",
+                  "hire_date",
+                  "salary",
+                  "exempt_from_overtime",
+                  "federal_allowances"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "ssn": {
+                    "type": "string"
+                  },
+                  "address": {
+                    "type": "string"
+                  },
+                  "occupation": {
+                    "type": "string"
+                  },
+                  "gender": {
+                    "type": "string"
+                  },
+                  "hire_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "salary": {
+                    "type": "integer"
+                  },
+                  "regular_hourly_rate": {
+                    "type": "integer"
+                  },
+                  "overtime_hourly_rate": {
+                    "type": "integer"
+                  },
+                  "exempt_from_overtime": {
+                    "type": "boolean"
+                  },
+                  "federal_allowances": {
+                    "type": "integer"
+                  },
+                  "retirement_contribution": {
+                    "type": "integer"
+                  },
+                  "insurance_deduction": {
+                    "type": "integer"
+                  },
+                  "other_deductions": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Payroll record created successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
     }
   },
   "tags": []
