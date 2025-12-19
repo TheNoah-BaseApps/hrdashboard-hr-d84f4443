@@ -12,7 +12,10 @@ import {
   FileText,
   User,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  DollarSign,
+  Heart,
+  Users
 } from 'lucide-react';
 
 const navItems = [
@@ -20,6 +23,9 @@ const navItems = [
   { name: 'Access Management', href: '/access-management', icon: UserCheck },
   { name: 'Employee Onboarding', href: '/employee-onboarding', icon: ClipboardList },
   { name: 'Employee Staffing', href: '/employee-staffing', icon: Briefcase },
+  { name: 'Compensation Planning', href: '/compensation-planning', icon: DollarSign },
+  { name: 'Culture & Experience', href: '/culture-experience', icon: Heart },
+  { name: 'Employee Engagement', href: '/employee-engagement', icon: Users },
   { name: 'Reports', href: '/reports', icon: FileText },
   { name: 'Profile', href: '/profile', icon: User },
 ];

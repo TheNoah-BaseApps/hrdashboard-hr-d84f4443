@@ -218,6 +218,468 @@
         }
       }
     },
+    "/api/compensation-planning/{id}": {
+      "get": {
+        "summary": "Get a specific compensation planning record",
+        "description": "Retrieve a single compensation planning record by ID",
+        "tags": [
+          "Compensation Planning"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "Compensation planning record ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved record"
+          },
+          "404": {
+            "description": "Record not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a compensation planning record",
+        "description": "Update an existing compensation planning record",
+        "tags": [
+          "Compensation Planning"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Record updated successfully"
+          },
+          "404": {
+            "description": "Record not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a compensation planning record",
+        "description": "Delete a compensation planning record by ID",
+        "tags": [
+          "Compensation Planning"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Record deleted successfully"
+          },
+          "404": {
+            "description": "Record not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/compensation-planning": {
+      "get": {
+        "summary": "Get all compensation planning records",
+        "description": "Retrieve all compensation planning and salary review records with optional filtering",
+        "tags": [
+          "Compensation Planning"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "department",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by department"
+          },
+          {
+            "in": "query",
+            "name": "approval_status",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by approval status"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "default": 50
+            },
+            "description": "Number of records to return"
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            },
+            "description": "Number of records to skip"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved compensation planning records",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "total": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new compensation planning record",
+        "description": "Create a new compensation planning and salary review record",
+        "tags": [
+          "Compensation Planning"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "employee_name",
+                  "employee_id",
+                  "department",
+                  "current_salary",
+                  "proposed_increase",
+                  "review_date",
+                  "approval_status",
+                  "decision_maker",
+                  "effective_date"
+                ],
+                "properties": {
+                  "employee_name": {
+                    "type": "string"
+                  },
+                  "employee_id": {
+                    "type": "string"
+                  },
+                  "department": {
+                    "type": "string"
+                  },
+                  "current_salary": {
+                    "type": "integer"
+                  },
+                  "proposed_increase": {
+                    "type": "integer"
+                  },
+                  "review_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "approval_status": {
+                    "type": "string"
+                  },
+                  "remarks": {
+                    "type": "string"
+                  },
+                  "decision_maker": {
+                    "type": "string"
+                  },
+                  "effective_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Compensation planning record created successfully"
+          },
+          "400": {
+            "description": "Invalid input data"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/culture-experience/{id}": {
+      "get": {
+        "summary": "Get a specific culture and experience initiative",
+        "description": "Retrieve a single initiative by ID",
+        "tags": [
+          "Culture and Experience"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved initiative"
+          },
+          "404": {
+            "description": "Initiative not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a culture and experience initiative",
+        "description": "Update an existing initiative",
+        "tags": [
+          "Culture and Experience"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Initiative updated successfully"
+          },
+          "404": {
+            "description": "Initiative not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a culture and experience initiative",
+        "description": "Delete an initiative by ID",
+        "tags": [
+          "Culture and Experience"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Initiative deleted successfully"
+          },
+          "404": {
+            "description": "Initiative not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/culture-experience": {
+      "get": {
+        "summary": "Get all culture and experience initiatives",
+        "description": "Retrieve all culture and employee experience initiatives with optional filtering",
+        "tags": [
+          "Culture and Experience"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "department",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by department"
+          },
+          {
+            "in": "query",
+            "name": "status",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by status"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "default": 50
+            },
+            "description": "Number of records to return"
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            },
+            "description": "Number of records to skip"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved initiatives"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new culture and experience initiative",
+        "description": "Create a new culture and employee experience initiative",
+        "tags": [
+          "Culture and Experience"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "initiative_name",
+                  "team_involved",
+                  "date_of_initiative",
+                  "department",
+                  "status",
+                  "contact_person"
+                ],
+                "properties": {
+                  "initiative_name": {
+                    "type": "string"
+                  },
+                  "team_involved": {
+                    "type": "string"
+                  },
+                  "date_of_initiative": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "department": {
+                    "type": "string"
+                  },
+                  "feedback": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  },
+                  "contact_person": {
+                    "type": "string"
+                  },
+                  "action_plan": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Initiative created successfully"
+          },
+          "400": {
+            "description": "Invalid input data"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
     "/api/dashboard/alerts": {
       "get": {
         "summary": "Get expiring access and overdue tasks",
@@ -232,6 +694,236 @@
         "tags": [
           "Dashboard"
         ]
+      }
+    },
+    "/api/employee-engagement/{id}": {
+      "get": {
+        "summary": "Get a specific employee engagement activity",
+        "description": "Retrieve a single engagement activity by ID",
+        "tags": [
+          "Employee Engagement"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved activity"
+          },
+          "404": {
+            "description": "Activity not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update an employee engagement activity",
+        "description": "Update an existing engagement activity",
+        "tags": [
+          "Employee Engagement"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Activity updated successfully"
+          },
+          "404": {
+            "description": "Activity not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete an employee engagement activity",
+        "description": "Delete an engagement activity by ID",
+        "tags": [
+          "Employee Engagement"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Activity deleted successfully"
+          },
+          "404": {
+            "description": "Activity not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/employee-engagement": {
+      "get": {
+        "summary": "Get all employee engagement activities",
+        "description": "Retrieve all employee engagement activities and feedback with optional filtering",
+        "tags": [
+          "Employee Engagement"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "department",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by department"
+          },
+          {
+            "in": "query",
+            "name": "status",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by status"
+          },
+          {
+            "in": "query",
+            "name": "employee_id",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by employee ID"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "default": 50
+            },
+            "description": "Number of records to return"
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            },
+            "description": "Number of records to skip"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved engagement activities"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new employee engagement activity",
+        "description": "Create a new employee engagement activity and feedback record",
+        "tags": [
+          "Employee Engagement"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "employee_name",
+                  "employee_id",
+                  "department",
+                  "engagement_activity",
+                  "date_of_activity",
+                  "organizer",
+                  "status"
+                ],
+                "properties": {
+                  "employee_name": {
+                    "type": "string"
+                  },
+                  "employee_id": {
+                    "type": "string"
+                  },
+                  "department": {
+                    "type": "string"
+                  },
+                  "engagement_activity": {
+                    "type": "string"
+                  },
+                  "date_of_activity": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "feedback": {
+                    "type": "string"
+                  },
+                  "satisfaction_score": {
+                    "type": "integer"
+                  },
+                  "suggestions": {
+                    "type": "string"
+                  },
+                  "organizer": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Engagement activity created successfully"
+          },
+          "400": {
+            "description": "Invalid input data"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
       }
     },
     "/api/employee-onboarding/{id}": {
