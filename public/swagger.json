@@ -926,6 +926,250 @@
         }
       }
     },
+    "/api/employee-helpdesk/{id}": {
+      "get": {
+        "summary": "Get a helpdesk ticket by ID",
+        "description": "Retrieve a single employee helpdesk ticket",
+        "tags": [
+          "Employee Helpdesk"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Ticket ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ticket details"
+          },
+          "404": {
+            "description": "Ticket not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a helpdesk ticket",
+        "description": "Update an existing employee helpdesk ticket",
+        "tags": [
+          "Employee Helpdesk"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ticket updated successfully"
+          },
+          "404": {
+            "description": "Ticket not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a helpdesk ticket",
+        "description": "Delete an employee helpdesk ticket",
+        "tags": [
+          "Employee Helpdesk"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ticket deleted successfully"
+          },
+          "404": {
+            "description": "Ticket not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/employee-helpdesk": {
+      "get": {
+        "summary": "Get all employee helpdesk tickets",
+        "description": "Retrieve a list of all employee helpdesk tickets with pagination",
+        "tags": [
+          "Employee Helpdesk"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "description": "Page number"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "default": 50
+            },
+            "description": "Number of items per page"
+          },
+          {
+            "in": "query",
+            "name": "status",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by status"
+          },
+          {
+            "in": "query",
+            "name": "priority",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by priority"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of helpdesk tickets",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "pagination": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new helpdesk ticket",
+        "description": "Create a new employee helpdesk ticket",
+        "tags": [
+          "Employee Helpdesk"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "employee_name",
+                  "employee_id",
+                  "department",
+                  "issue_type",
+                  "description",
+                  "date_raised",
+                  "status",
+                  "priority",
+                  "assigned_to"
+                ],
+                "properties": {
+                  "employee_name": {
+                    "type": "string"
+                  },
+                  "employee_id": {
+                    "type": "string"
+                  },
+                  "department": {
+                    "type": "string"
+                  },
+                  "issue_type": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "date_raised": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "status": {
+                    "type": "string"
+                  },
+                  "priority": {
+                    "type": "string"
+                  },
+                  "resolution_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "assigned_to": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Ticket created successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
     "/api/employee-onboarding/{id}": {
       "get": {
         "summary": "Retrieve single onboarding task",
@@ -958,6 +1202,230 @@
         "tags": [
           "Employee Onboarding"
         ]
+      }
+    },
+    "/api/employee-rewards/{id}": {
+      "get": {
+        "summary": "Get an employee reward by ID",
+        "description": "Retrieve a single employee reward",
+        "tags": [
+          "Employee Rewards"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Reward ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Reward details"
+          },
+          "404": {
+            "description": "Reward not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update an employee reward",
+        "description": "Update an existing employee reward",
+        "tags": [
+          "Employee Rewards"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Reward updated successfully"
+          },
+          "404": {
+            "description": "Reward not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete an employee reward",
+        "description": "Delete an employee reward",
+        "tags": [
+          "Employee Rewards"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Reward deleted successfully"
+          },
+          "404": {
+            "description": "Reward not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/employee-rewards": {
+      "get": {
+        "summary": "Get all employee rewards",
+        "description": "Retrieve a list of all employee rewards and benefits with pagination",
+        "tags": [
+          "Employee Rewards"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "description": "Page number"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "default": 50
+            },
+            "description": "Number of items per page"
+          },
+          {
+            "in": "query",
+            "name": "benefit_type",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by benefit type"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of rewards",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "pagination": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new employee reward",
+        "description": "Create a new employee reward or benefit plan",
+        "tags": [
+          "Employee Rewards"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "benefit_type",
+                  "plan_name",
+                  "date",
+                  "coverage",
+                  "employee_pays",
+                  "company_pays",
+                  "frequency"
+                ],
+                "properties": {
+                  "benefit_type": {
+                    "type": "string"
+                  },
+                  "plan_name": {
+                    "type": "string"
+                  },
+                  "date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "coverage": {
+                    "type": "string"
+                  },
+                  "employee_pays": {
+                    "type": "integer"
+                  },
+                  "company_pays": {
+                    "type": "integer"
+                  },
+                  "frequency": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Reward created successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
       }
     },
     "/api/employee-staffing/{id}": {
@@ -1087,6 +1555,235 @@
           },
           "400": {
             "description": "Invalid request data"
+          }
+        }
+      }
+    },
+    "/api/goal-settings/{id}": {
+      "get": {
+        "summary": "Get a goal setting by ID",
+        "description": "Retrieve a single goal setting",
+        "tags": [
+          "Goal Settings"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Goal setting ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Goal setting details"
+          },
+          "404": {
+            "description": "Goal setting not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a goal setting",
+        "description": "Update an existing goal setting",
+        "tags": [
+          "Goal Settings"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Goal setting updated successfully"
+          },
+          "404": {
+            "description": "Goal setting not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a goal setting",
+        "description": "Delete a goal setting",
+        "tags": [
+          "Goal Settings"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Goal setting deleted successfully"
+          },
+          "404": {
+            "description": "Goal setting not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/goal-settings": {
+      "get": {
+        "summary": "Get all goal settings",
+        "description": "Retrieve a list of all KPI and goal settings with pagination",
+        "tags": [
+          "Goal Settings"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "description": "Page number"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "default": 50
+            },
+            "description": "Number of items per page"
+          },
+          {
+            "in": "query",
+            "name": "type",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by KPI type"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of goal settings",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "pagination": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new goal setting",
+        "description": "Create a new KPI or goal setting",
+        "tags": [
+          "Goal Settings"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "kpi",
+                  "type",
+                  "purpose",
+                  "definition",
+                  "target",
+                  "collection_frequency",
+                  "reporting_frequency"
+                ],
+                "properties": {
+                  "kpi": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  },
+                  "purpose": {
+                    "type": "string"
+                  },
+                  "definition": {
+                    "type": "string"
+                  },
+                  "target": {
+                    "type": "string"
+                  },
+                  "kpi_low_comment": {
+                    "type": "string"
+                  },
+                  "kpi_high_comment": {
+                    "type": "string"
+                  },
+                  "collection_frequency": {
+                    "type": "string"
+                  },
+                  "reporting_frequency": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Goal setting created successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "500": {
+            "description": "Server error"
           }
         }
       }

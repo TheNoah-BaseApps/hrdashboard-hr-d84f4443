@@ -15,7 +15,10 @@ import {
   ChevronRight,
   DollarSign,
   Heart,
-  Users
+  Users,
+  Headphones,
+  Gift,
+  Target
 } from 'lucide-react';
 
 const navItems = [
@@ -26,6 +29,9 @@ const navItems = [
   { name: 'Compensation Planning', href: '/compensation-planning', icon: DollarSign },
   { name: 'Culture & Experience', href: '/culture-experience', icon: Heart },
   { name: 'Employee Engagement', href: '/employee-engagement', icon: Users },
+  { name: 'Employee Helpdesk', href: '/employee-helpdesk', icon: Headphones },
+  { name: 'Employee Rewards', href: '/employee-rewards', icon: Gift },
+  { name: 'Goal Settings', href: '/goal-settings', icon: Target },
   { name: 'Reports', href: '/reports', icon: FileText },
   { name: 'Profile', href: '/profile', icon: User },
 ];
