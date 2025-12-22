@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 3000",
+    "dev": "next dev -p 3006",
     "build": "npm run generate-swagger && next build",
     "generate-swagger": "node lib/swagger-script.js",
     "start": "next start",
